@@ -6,5 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'transport';
+  title = 'transport service';
+
+  eventmsg;
+
+  onActivate(componentReference) {
+    console.log(componentReference);
+    // // Input
+    // componentReference.logComponent();
+
+    // // Output
+    // //Below will subscribe to the searchItem emitter
+    // componentReference.searchEvent.subscribe((data) => {
+    //   // Will receive the data from child here 
+    //   this.eventmsg = data;
+    // });
+  }
 }

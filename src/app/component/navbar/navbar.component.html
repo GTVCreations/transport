@@ -1,0 +1,20 @@
+<!-- Title -->
+<a class="navbar-brand" routerLink="/">{{appTitle | titlecase}}</a>
+<!-- Navbar Menu Toggler -->
+<button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<!-- Navbar Menu -->
+<div class="navbar-collapse collapse" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/book" routerLinkActive="active">Book Tickets</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/check" routerLinkActive="active">Check Tickets</a>
+    </li>
+    </ul>
+</div>

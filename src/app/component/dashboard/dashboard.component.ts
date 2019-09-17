@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +7,11 @@ import { Title } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
 
-  componentTitle = "Dashboard";
+  componentName = "Dashboard";
 
   // @Output() public searchEvent = new EventEmitter();
   
-  constructor(private titleService: Title) {
+  constructor() {
     
   }
 

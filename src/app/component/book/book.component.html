@@ -1,1 +1,51 @@
-<p>book works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3>Book Tickets</h3>
+            <hr>
+        </div>
+        <div class="col-md-12 col-lg-6">
+            <h5>Bus Number: </h5>
+            <hr>
+            <h5>Available Seats: </h5>
+            <hr>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <!-- Seat Arrangements Layout -->
+                    <div class="seat-arrangements">
+                        <div class="row" *ngFor="let rowofseats of busdetails.seats | reverse" >
+                            <div class="col-2" *ngFor="let seat of rowofseats" >
+                                <button type="button" class="btn btn-sm btn-outline-secondary text-dark" *ngIf="seat && !seat.booking" disabled>{{seat.id}}</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" *ngIf="seat && seat.booking && !seat.booked" [disabled]="seat.selected">{{seat.id}}</button>
+                                <button type="button" class="btn btn-sm btn-danger" *ngIf="seat && seat.booking && seat.booked" disabled>{{seat.id}}</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 dashboard"></div>
+                            <div class="col-12 mirror"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h5>Denotions: </h5>
+            <p class="denotions">
+                <button class="btn btn-sm btn-outline-secondary text-dark" disabled>*</button> - Not Available for Booking
+                <br>
+                <button class="btn btn-sm btn-outline-primary">*</button> - Available for Booking
+                <br>
+                <button class="btn btn-sm btn-outline-primary" disabled>*</button> - Seats Locked by Others
+                <br>
+                <button class="btn btn-sm btn-outline-primary bg-secondary text-white">*</button> - Seats Locked by You
+                <br>
+                <button class="btn btn-sm btn-danger" disabled>*</button> - Already Booked by Others
+                <br>
+                <button class="btn btn-sm btn-success" disabled>*</button> - Already Booked by You
+            </p>
+        </div>
+        <div class="col-md-12 col-lg-6">
+            <h5>Bus Route: </h5>
+            <hr>
+        </div>
+    </div>
+</div>

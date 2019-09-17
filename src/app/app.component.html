@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" appNavbar [navtitle]="title"></nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" appNavbar [navtitle]="siteTitle"></nav>
 <main>
-    <router-outlet (activate)="onActivate($event)"></router-outlet>
+    <div class="container">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
 </main>
 <footer appFooter></footer>
-{{eventmsg}}
+<!-- {{eventmsg}} -->

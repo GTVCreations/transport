@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'transport service';
+  public siteTitle = 'Transport Service';
+  public siteSeperator = ' | ';
 
-  eventmsg;
+  constructor(private titleService: Title) {
+    
+  }
+
+  // eventmsg;
 
   onActivate(componentReference) {
-    console.log(componentReference);
+    console.log(componentReference.componentName);
+
+    if(componentReference.componentName) {
+      this.titleService.setTitle(componentReference.componentName+this.siteSeperator+this.siteTitle);
+    } else {
+      this.titleService.setTitle(this.siteTitle);
+    }
     // // Input
     // componentReference.logComponent();
 

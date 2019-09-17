@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckComponent implements OnInit {
 
-  componentTitle = "Check";
+  componentName = "Verify Tickets";
 
   constructor() { }
 
@@ -15,7 +15,7 @@ export class CheckComponent implements OnInit {
   }
 
   public logComponent() {
-    console.log(this.componentTitle);
+    // console.log(this.componentTitle);
   }
 
 }

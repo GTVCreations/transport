@@ -1,6 +1,6 @@
 .seat-arrangements {
     box-shadow: 0px 0px 5px 0px #ccc;
-    // background: #ddd;
+    background: #f6f6f6;
     padding: 15px 25px;
     // margin-bottom: 15px;
     border-radius: 15px;
@@ -22,8 +22,8 @@
 .mirror {
     min-height: 10px;
     border-radius: 0 0 100% 100%;
-    background: #ccc;
-    box-shadow: inset 0px 0px 5px 0px #000;
+    background: #ddd;
+    box-shadow: inset 0px 0px 5px 0px #ccc;
 }
 
 .dashboard {
@@ -36,11 +36,11 @@
         content: '';
         position: absolute;
         left: 0;
-        width: 50%;
+        width: 30%;
         height: 100%;
-        background: #ddd;
+        background: #eee;
         border-radius: 10px 50% 0 0;
-        box-shadow: inset 0px 0px 5px 0px #000;
+        box-shadow: inset 0px 0px 5px 0px #ccc;
     }
 
     &::after {
@@ -50,14 +50,15 @@
         width: 16.666666666666668%;
         height: 100%;
         background-image: repeating-linear-gradient(90deg,#ccc,#eee 25%,#ddd 25%); 
-        box-shadow: inset 0px 0px 5px 0px #000;
+        box-shadow: inset 0px 0px 5px 0px #ccc;
     }
 }
 
 :disabled {
     cursor: not-allowed;
 }
-.btn-outline-primary {
+.btn-outline-primary,
+.btn-outline-secondary {
     &:disabled {
         background: #ddd;
     }
@@ -72,3 +73,8 @@
 .text-white {
     color: #fff !important;
 }
+
+iframe {
+    box-shadow: 0px 0px 5px 0px #ccc;
+}
+

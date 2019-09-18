@@ -11,8 +11,8 @@ export class BookComponent implements OnInit {
     id: "TN 32 M 1234",
     route: {
       code: "NH32",
-      from: "Villupuram Bus Stand",
-      to: "Chennai (CMBT)"
+      from: "Chennai (CMBT)",
+      to: "Villupuram Bus Stand",
     },
     seats: [
       [
@@ -24,7 +24,7 @@ export class BookComponent implements OnInit {
         {id: 'C'},
       ],
       [
-        {id: 1, booking: true, booked: true},
+        {id: 1, booking: true, booked: false},
         {id: 2, booking: true, booked: true},
         {id: 3, booking: true, booked: true},
         ,
@@ -116,6 +116,8 @@ export class BookComponent implements OnInit {
 
   public componentName = "Book Tickets";
 
+  public showToast = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -130,8 +132,9 @@ export class BookComponent implements OnInit {
     this.bus.available = 0;
     this.bus.currentUserSelected = 0;
 
+    
+
     for(let i=0; i < this.bus.seats.length; i++) {
-      
       for(let j=0; j < this.bus.seats[i].length; j++) {
         
           if( this.bus.seats[i][j] ) {
@@ -146,6 +149,35 @@ export class BookComponent implements OnInit {
 
       }
     }
+  }
+
+  public bookTickets() {
+    this.bus.available = 0;
+    this.bus.currentUserSelected = 0;
+
+    for(let i=0; i < this.bus.seats.length; i++) {
+      
+      for(let j=0; j < this.bus.seats[i].length; j++) {
+        
+          if( this.bus.seats[i][j] ) {
+            if( this.bus.seats[i][j].booking && !this.bus.seats[i][j].booked && !this.bus.seats[i][j].selected && this.bus.seats[i][j].currentUserSelected ) {
+              this.bus.seats[i][j].currentUserSelected = false;
+              this.bus.seats[i][j].booked = true;
+            }
+
+            if( this.bus.seats[i][j].booking && !this.bus.seats[i][j].booked && !this.bus.seats[i][j].selected ) {
+              this.bus.available++;
+            }
+
+            if( this.bus.seats[i][j].currentUserSelected ) {
+              this.bus.currentUserSelected++;
+            }
+          }
+
+      }
+    }
+
+    this.showToast = true;
   }
   
 }

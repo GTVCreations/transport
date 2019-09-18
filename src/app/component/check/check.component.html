@@ -1,1 +1,75 @@
-<p>check works!</p>
+<div class="container">
+    <div class="row" *ngIf="bus.trip">
+        <div class="col-12">
+            <h3>{{componentName}}</h3>
+            <hr>
+        </div>
+        <div class="col-md-12 col-lg-6">
+            <h5>Bus Number: <strong>{{bus.id}}</strong></h5>
+            <hr>
+            <h5>Pending Seat Verification: <strong>{{bus.reviewerPending}}</strong></h5>
+            <hr>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <!-- Seat Arrangements Layout -->
+                    <div class="seat-arrangements">
+                        <div class="row" *ngFor="let rowofseats of bus.seats | reverse" >
+                            <div class="col-2" *ngFor="let seat of rowofseats" >
+                                <button type="button" class="btn btn-sm btn-outline-secondary text-dark" *ngIf="seat && !seat.booking" disabled>{{seat.id}}</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" *ngIf="seat && seat.booking && !seat.booked" [disabled]="!seat.booked">{{seat.id}}</button>
+                                <button type="button" class="btn btn-sm" *ngIf="seat && seat.booking && seat.booked" (click)="seat.reviewerSelected = !seat.reviewerSelected; updateSelectedTickets()" [ngClass]="{'bg-secondary text-white': seat.reviewerSelected, 'btn-success': seat.verified, 'btn-danger': !seat.verified }" [disabled]="seat.verified">{{seat.id}}</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 dashboard"></div>
+                            <div class="col-12 mirror"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h5>Denotions: </h5>
+            <p class="denotions">
+                <button class="btn btn-sm btn-outline-secondary text-dark" disabled>*</button> - Not Available for Reservation
+                <br>
+                <button class="btn btn-sm btn-outline-primary" disabled>*</button> - Unreserved
+                <br>
+                <button class="btn btn-sm btn-danger">*</button> - Reserved
+                <br>
+                <button class="btn btn-sm btn-outline-primary bg-secondary text-white">*</button> - Seats Locked for Verification
+                <br>
+                <button class="btn btn-sm btn-success" disabled>*</button> - Verified Seats
+            </p>
+        </div>
+        <div class="col-md-12 col-lg-6">
+            <h5>Bus Route: <strong>{{bus.route.code}}</strong></h5>
+            <hr>
+            <h5>Trip: From <strong>{{bus.route.from}}</strong> to <strong>{{bus.route.to}}</strong></h5>
+            <hr>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d997172.4162469951!2d79.27768296546361!3d12.502583644300936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x3a52674f8f436133%3A0xfb8f38bd55c2f815!2sCMBT%20BUS%20STAND%20KOYAMBEDU%2C%20Koyambedu%2C%20Chennai%2C%20Tamil%20Nadu!3m2!1d13.0695164!2d80.20402899999999!4m5!1s0x3a53568ffb58734b%3A0x3ee9480bf352bde2!2sVillupuram%20New%20Bus%20Stand%20Rd%2C%20Puntottam%2C%20Tamil%20Nadu%20605602!3m2!1d11.9299734!2d79.483273!5e0!3m2!1sen!2sin!4v1568743283623!5m2!1sen!2sin" width="100%" height="590" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            <hr>
+            <h5>Action: </h5>
+            <ngb-toast *ngIf="showToast" [delay]="2000" (hide)="showToast = false;" style="margin-top: 20px; max-width: none; text-align: center;">Report Submitted Successfully! Thank You!!</ngb-toast>
+            <p class="text-center" *ngIf="!showToast">
+                Click here to confirm your seats / tickets verification
+                <br>
+                <span class="text-primary" style="font-size: 24px;" *ngIf="bus.reviewerSelected">Selected <kbd>{{bus.reviewerSelected}}</kbd> seat{{bus.reviewerSelected > 1 ? 's': ''}} for Verification Submission</span>
+                <br *ngIf="bus.reviewerSelected">
+                <br>
+                <button type="button" class="btn btn-lg" [ngClass]="{'btn-primary': bus.reviewerSelected, 'btn-outline-primary' : !bus.reviewerSelected}" [disabled]="!bus.reviewerSelected" (click)="submitReport()">Submit Report</button>
+                <br><br>
+                <small><strong>**Note:</strong> Please select reserved seats to submit verification report</small>
+            </p>
+        </div>
+    </div>
+    <div class="row" *ngIf="!bus.trip">
+        <div class="col-12">
+            <h3>Trip Not Started!</h3>
+            <hr>
+        </div>
+        <div class="col-12">
+            <p><strong>Message: </strong>Booking is going on. You can verify the passenger seats once the current trip was started.</p>
+        </div>
+    </div>
+</div>
+    

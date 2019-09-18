@@ -126,13 +126,12 @@ export class DashboardComponent implements OnInit {
 
   // @Output() public searchEvent = new EventEmitter();
   
-  constructor(private _dataService: DataService) {
-    this.getUsersMysql();
-  }
+  constructor(private _dataService: DataService) {}
 
   ngOnInit() {
     // this.searchEvent.emit("hello");
-    
+    this.getUsersMysql();
+    this.totalPassengers();
   }
 
   private getUsersMysql() {
@@ -141,8 +140,6 @@ export class DashboardComponent implements OnInit {
       data => this.bus = data,
       error => console.log(error.status)
     );
-
-    // this.totalPassengers();
   }
 
   
@@ -159,6 +156,7 @@ export class DashboardComponent implements OnInit {
 
   public totalPassengers() {
     this.bus.verified = 0;
+
 
     for(let i=0; i < this.bus.seats.length; i++) {
       for(let j=0; j < this.bus.seats[i].length; j++) {

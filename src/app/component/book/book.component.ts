@@ -201,6 +201,7 @@ export class BookComponent implements OnInit {
       }
     }
 
+    this._dataService.setBusData(this.bus);
     this.showToast = true;
   }
   

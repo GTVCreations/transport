@@ -33,8 +33,7 @@ export const BUS:any = `
 			{
 				"id": 2,
 				"booking": true,
-				"booked": true,
-				"verified": true
+				"booked": true
 			},
 			{
 				"id": 3,
@@ -191,12 +190,14 @@ export const BUS:any = `
 			{
 				"id": 29,
 				"booking": true,
-				"booked": false
+				"booked": false,
+				"currentUserSelected": true
 			},
 			{
 				"id": 30,
 				"booking": true,
-				"booked": false
+				"booked": false,
+				"currentUserSelected": true
 			}
 		],
 		[

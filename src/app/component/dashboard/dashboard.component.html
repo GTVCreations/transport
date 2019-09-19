@@ -15,7 +15,7 @@
                     <div class="seat-arrangements">
                         <div class="row" *ngFor="let rowofseats of bus.seats | reverse" >
                             <div class="col-2" *ngFor="let seat of rowofseats" >
-                                <button type="button" class="btn btn-sm" *ngIf="seat" [ngClass]="{'btn-outline-secondary text-dark': !seat.booking, 'btn-outline-primary': !seat.booked, 'bg-secondary text-white': seat.selected, 'btn-danger': seat.booked, 'bg-success': seat.verified}" disabled>{{seat.id}}</button>
+                                <button type="button" class="btn btn-sm" *ngIf="seat" [ngClass]="{'btn-outline-secondary text-dark': !seat.booking, 'btn-outline-primary': !seat.booked, 'bg-secondary text-white': seat.selected || seat.currentUserSelected, 'btn-danger': seat.booked, 'bg-success': seat.verified}" disabled>{{seat.id}}</button>
                             </div>
                         </div>
                         <div class="row">
@@ -51,9 +51,11 @@
                 <span style="margin-top: 20px; max-width: none; text-align: center;">Trip Started Successfully!</span>
                 <br>
                 <br>
-                <span class="text-primary" style="font-size: 24px;" *ngIf="bus.trip">Ends in <kbd>{{countDown}}</kbd></span>
+                <span class="text-primary" style="font-size: 24px;" *ngIf="bus.trip && countDown">Ends in <kbd>{{countDown}}</kbd></span>
             </p>
             <p class="text-center" *ngIf="!bus.trip">
+                <ngb-toast *ngIf="showToast" [delay]="2000" (hide)="showToast = false;" style="margin-top: 20px; max-width: none; text-align: center;">Trip Completed Successfully!</ngb-toast>
+                <br>
                 Click here to close booking and start the trip
                 <br>
                 <br>

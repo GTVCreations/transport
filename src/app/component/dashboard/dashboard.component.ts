@@ -122,15 +122,15 @@ export class DashboardComponent implements OnInit {
 
   public bus:any = {};
 
-  public countDown:any = "00:00:00";
+  public countDown:any;
 
   componentName = "Dashboard";
 
+  public showToast = false;
+
   // @Output() public searchEvent = new EventEmitter();
   
-  constructor(private _dataService: DataService) {
-    
-  }
+  constructor(private _dataService: DataService) { }
 
   ngOnInit() {
     this.getBusData();
@@ -209,8 +209,9 @@ export class DashboardComponent implements OnInit {
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            console.log(--timer);
+            // console.log(--timer);
             if (--timer < 0) {
+
                 clearInterval(myTimer);
                 timer = duration;
                 hours = "00";
@@ -225,7 +226,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  
+
   public completeJourney() {
+    this.showToast = true;
     this._dataService.resetBusData();
   }
 

@@ -16,7 +16,7 @@
                         <div class="row" *ngFor="let rowofseats of bus.seats | reverse">
                             <div class="col-2" *ngFor="let seat of rowofseats">
                                 <button type="button" class="btn btn-sm btn-outline-secondary text-dark" *ngIf="seat && !seat.booking" disabled>{{seat.id}}</button>
-                                <button type="button" class="btn btn-sm btn-outline-primary" *ngIf="seat && seat.booking && !seat.booked" (click)="seat.currentUserSelected = !seat.currentUserSelected; totalSeatsAvailable()" [ngClass]="{'bg-secondary text-white': seat.currentUserSelected }" [disabled]="seat.selected">{{seat.id}}</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" *ngIf="seat && seat.booking && !seat.booked" (click)="seat.currentUserSelected = !seat.currentUserSelected; totalSeatsAvailable(false)" [ngClass]="{'bg-secondary text-white': seat.currentUserSelected }" [disabled]="seat.selected">{{seat.id}}</button>
                                 <button type="button" class="btn btn-sm btn-danger" *ngIf="seat && seat.booking && seat.booked" disabled>{{seat.id}}</button>
                             </div>
                         </div>

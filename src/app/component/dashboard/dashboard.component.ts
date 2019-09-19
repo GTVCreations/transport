@@ -122,27 +122,34 @@ export class DashboardComponent implements OnInit {
 
   public bus:any = {};
 
+  public countDown:any = "00:00:00";
+
   componentName = "Dashboard";
 
   // @Output() public searchEvent = new EventEmitter();
   
   constructor(private _dataService: DataService) {
-    this.getUsersMysql();
-  }
-
-  ngOnInit() {
-    // this.searchEvent.emit("hello");
     
   }
 
-  private getUsersMysql() {
-    console.log("get");
-    this._dataService.getMysqlUsersData().subscribe(
-      data => this.bus = data,
-      error => console.log(error.status)
-    );
+  ngOnInit() {
+    this.getBusData();
+    this.countDownFunc();
 
-    // this.totalPassengers();
+    setInterval(()=> {
+      this.getBusData(); 
+    },1000);
+
+
+
+  }
+
+  private getBusData() {
+    // this._dataService.getBusData().subscribe(
+    //   data => this.totalPassengers(data),
+    //   error => console.log(error.status)
+    // );
+    this.totalPassengers(this._dataService.getBusData());
   }
 
   
@@ -157,7 +164,12 @@ export class DashboardComponent implements OnInit {
   //   this.searchEvent.emit(data);
   // }
 
-  public totalPassengers() {
+  public totalPassengers(aData) {
+
+    if(aData) {
+      this.bus = aData;
+    }
+
     this.bus.verified = 0;
 
     for(let i=0; i < this.bus.seats.length; i++) {
@@ -175,6 +187,46 @@ export class DashboardComponent implements OnInit {
 
   public startTrip() {
     this.bus.trip = true;
+    this.bus.start = new Date().getTime();
+    this.bus.end = this.bus.start + new Date(this.bus.journey*60*1000).getTime();
+    this._dataService.setBusData(this.bus);
+
+    this.countDownFunc();
+  }
+
+  public countDownFunc() {
+    if(this.bus.trip) {
+
+        var duration = (this.bus.end - new Date().getTime())/(1000*60)*60;
+        var timer = duration , minutes, seconds, hours;
+        
+        var myTimer = setInterval(() => {
+            hours = parseInt((timer / (60*60)).toString(), 10);
+            minutes = parseInt(((timer / 60) % 60).toString(), 10);
+            seconds = parseInt((timer % 60).toString(), 10);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            console.log(--timer);
+            if (--timer < 0) {
+                clearInterval(myTimer);
+                timer = duration;
+                hours = "00";
+                minutes = "00";
+                seconds = "00";
+                this.completeJourney();
+            }
+            
+            this.countDown = hours + ":" + minutes + ":" + seconds;
+        }, 1000);
+
+    }
+  }
+
+  public completeJourney() {
+    this._dataService.resetBusData();
   }
 
 }

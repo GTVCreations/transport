@@ -24,7 +24,7 @@ import { DataService } from './service/data.service';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     DataService

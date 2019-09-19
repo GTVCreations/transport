@@ -1,4 +1,4 @@
-<div class="container" *ngIf="bus">
+<div class="container" *ngIf="bus?.id">
     <div class="row">
         <div class="col-12">
             <h3>{{componentName}}</h3>
@@ -51,7 +51,7 @@
                 <span style="margin-top: 20px; max-width: none; text-align: center;">Trip Started Successfully!</span>
                 <br>
                 <br>
-                <span class="text-primary" style="font-size: 24px;" *ngIf="bus.trip">Ends in <kbd>00:00:00</kbd></span>
+                <span class="text-primary" style="font-size: 24px;" *ngIf="bus.trip">Ends in <kbd>{{countDown}}</kbd></span>
             </p>
             <p class="text-center" *ngIf="!bus.trip">
                 Click here to close booking and start the trip
